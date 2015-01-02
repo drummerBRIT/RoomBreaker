@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameController : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
+public class GameController : MonoBehaviour
+ {
+ 	public int Speed = 10;
+ 
+	void Start()
+	{
+		Player.Create(Speed, Vector2.up, Vector2.zero);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
 	}
 }
