@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
 	protected Vector2 _targetDirection;
 	protected bool _fire;
+	protected float _timer;
 	
 	public static Player Create(int speed, Vector2 direction, Vector2 position)
 	{
@@ -24,17 +25,23 @@ public class Player : MonoBehaviour
 	
 	void Update ()
 	{
-		float fraction = Time.time - Mathf.Floor(Time.time);
-		
-		Debug.Log("fraction: " + fraction + " %: " + (fraction % (1.0/Speed)) + " 1/s: " + (1.0/Speed));
-		
 		ReadInput();
 		
-		bool shouldUpdate = (fraction % (1.0/Speed)) < 0.2;
-		if(shouldUpdate)
+		if(_fire)
 		{
-			UpdatePlayer();	
+			Shoot();
 		}
+	}
+	
+	void FixedUpdate()
+	{
+		if(_timer >= (1.0/Speed))
+		{
+			UpdatePosition();
+			_timer = 0.0f;
+		}
+		
+		_timer += Time.fixedDeltaTime;
 	}
 	
 	void ReadInput()
@@ -56,7 +63,12 @@ public class Player : MonoBehaviour
 		}
 	}
 	
-	void Move()
+	void Shoot()
+	{
+	
+	}
+
+		void UpdatePosition()
 	{
 		if(Direction.y == 0)
 		{
@@ -82,19 +94,6 @@ public class Player : MonoBehaviour
 		}
 		
 		Position += Direction;
-	}
-	
-//	void Shoot()
-//	{
-//	
-//	}
-	
-	void UpdatePlayer()
-	{
-		Move();
-//		Shoot();
-		
 		_targetDirection = Direction;
-		_fire = false;
 	}
 }
