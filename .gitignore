@@ -1,0 +1,9 @@
+lds
+Library
+Temp
+*.csproj
+*.sln
+*.unityproj
+sc2.sublime-workspace
+*.userprefs
+.DS_Store
