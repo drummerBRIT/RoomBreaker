@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour 
+public class SnakeHead : MonoBehaviour 
 {
 	public int Speed { get; protected set;}
 	public Vector2 Direction {get; protected set;}
@@ -11,10 +11,10 @@ public class Player : MonoBehaviour
 	protected bool _fire;
 	protected float _timer;
 	
-	public static Player Create(int speed, Vector2 direction, Vector2 position)
+	public static SnakeHead Create(int speed, Vector2 direction, Vector2 position)
 	{
-		string prefabLocation = "Prefabs/Player";
-		Player player = (Instantiate(Resources.Load(prefabLocation)) as GameObject).GetComponent<Player>();
+		string prefabLocation = "Prefabs/Snake/Head";
+		SnakeHead player = (Instantiate(Resources.Load(prefabLocation)) as GameObject).GetComponent<SnakeHead>();
 		player.Speed = speed;
 		player.Direction = direction;
 		player._targetDirection = direction;
@@ -65,10 +65,16 @@ public class Player : MonoBehaviour
 	
 	void Shoot()
 	{
-	
+		string prefabLocation = "Prefabs/Ammunition/Base Amunnition";
+		GameObject gameObject = (Instantiate(Resources.Load(prefabLocation)) as GameObject);
+		gameObject.transform.position = Position;
+		
+		Rigidbody2D rBody = gameObject.GetComponent<Rigidbody2D>();
+		rBody.velocity = Direction * Speed * 2;
+		_fire = false;
 	}
 
-		void UpdatePosition()
+	void UpdatePosition()
 	{
 		if(Direction.y == 0)
 		{
@@ -83,7 +89,7 @@ public class Player : MonoBehaviour
 		}
 		if(Direction.x == 0)
 		{
-			if((_targetDirection == Vector2.up ) || _targetDirection == -Vector2.up)
+			if((_targetDirection == Vector2.up ) || _targetDirection == -Vector2.up) 
 			{
 				Direction = Direction;
 			}
@@ -96,4 +102,5 @@ public class Player : MonoBehaviour
 		Position += Direction;
 		_targetDirection = Direction;
 	}
+	
 }

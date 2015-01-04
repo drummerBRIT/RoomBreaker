@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Game : MonoBehaviour
@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
  
 	void Start()
 	{
-		Player.Create(Speed, Vector2.up, Vector2.zero);
+		SnakeHead.Create(Speed, Vector2.up, Vector2.zero);
 	}
 	
 	void Update ()
